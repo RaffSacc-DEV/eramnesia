@@ -102,7 +102,7 @@ export const ParallaxImages: React.FC = () => {
     const center = centerRef.current!;
     const container = containerRef.current!;
 
-    gsap.to("#preloader", { autoAlpha: 0, duration: 0.4 });
+    gsap.to("#preloader", {autoAlpha: 0, duration: 0.4 });
     gsap.to(center, { scale: 1.12, opacity: 0.3, repeat: -1, yoyo: true });
 
     const playFirst = () => {
@@ -115,8 +115,10 @@ export const ParallaxImages: React.FC = () => {
       v1.currentTime = 0;
       v1.play();
       v1.onended = () => {
+        v2.play();
         gsap.to(v1, { opacity: 0, duration: 0.8 });
-        gsap.to([v2,p2], { opacity: 1, duration: 0.8 });
+        gsap.to(v2, { opacity: 1, filter: "blur:(10px)", duration: 0.8 });
+        gsap.to(v2, { filter: "blur(5px)", duration: 0.8, delay:3});
 
         gsap.to([text, track], { opacity: 1, delay: 0.5 });
 
@@ -144,7 +146,7 @@ export const ParallaxImages: React.FC = () => {
       lastTap = now;
     });
 
-    /* SLIDER */
+    /* SLIDER
     Draggable.create(knob, {
       type: "x",
       bounds: track,
@@ -161,7 +163,7 @@ export const ParallaxImages: React.FC = () => {
           gsap.to(text, { opacity: 1 });
         }
       },
-    });
+    });*/
   }, [ready]);
 
   return (
@@ -194,13 +196,13 @@ export const ParallaxImages: React.FC = () => {
       {!ready && (
   <div
     id="preloader"
-    className="fixed inset-0 bg-[#791434] flex flex-col items-center justify-center z-[9999]"
+    className="fixed inset-0 bg-[#111111] flex flex-col items-center justify-center z-[9999]"
   >
     {/* IMMAGINE DI CARICAMENTO */}
     <img
-      src="/img/palazzoLogoRosso.jpg"
+      src="/img/start.jpg"
       alt="loader"
-      className="w-[180px] h-[180px] object-contain mb-6"
+      className="w-full h-full object-contain mb-6"
     />
 
     {/* SCRITTA ANIMATA "CARICAMENTO..." */}
@@ -234,13 +236,13 @@ export const ParallaxImages: React.FC = () => {
 )}
 
 
-      {/* AUDIO BUTTON */}
+      {/* AUDIO BUTTON 
       <button
         onClick={toggleAudio}
         className="fixed top-6 right-6 z-[999] text-white p-3 bg-white/30 backdrop-blur-md rounded-full"
       >
         {isMuted ? "🔇" : "🔊"}
-      </button>
+      </button>*/}
 
       <audio
         ref={audioRef}
@@ -252,26 +254,10 @@ export const ParallaxImages: React.FC = () => {
       />
 
       <div ref={containerRef} className="scene-container">
-
-        <img
-          ref={loghiref}
-          src="/img/topLocandina.png"
-          className="absolute top-[10%] w-[30%] object-contain h-[30%] left-[35%] pointer-events-none z-[2] opacity-1"
-          alt="poster1"
-        />
-
-        {/* Poster sotto Video1 */}
-        <img
-          ref={poster1}
-          src="/img/frameMobile1.png"
-          className="absolute object-contain w-full h-full pointer-events-none z-[0] opacity-1"
-          alt="poster1"
-        />
-
         {/* Video 1 */}
         <video
           ref={video1Ref}
-          src="/img/mobile1.mp4"
+          src="/img/intro.mp4"
           playsInline
           muted
           preload="auto"
@@ -292,21 +278,23 @@ export const ParallaxImages: React.FC = () => {
         {/* Video 2 */}
         <video
           ref={video2Ref}
-          src="/img/mobileVideo1.mp4"
+          src="/img/sfondo.mp4"
           playsInline
           muted
+          loop
           preload="auto"
           className="absolute w-full h-full opacity-0"
+          style={{ filter: "blur(0px)" }}
         />
 
-        {/* Slider */}
+        {/* Slider 
         <h2 ref={textRef} className="font-christmas absolute top-[72%] left-[12.5%] w-[75%] text-center text-white opacity-0 tracking-[0.3em]">
           TRASCINA PER CONTINUARE
         </h2>
         <div ref={trackRef} className="absolute top-[77%] left-1/2 w-[270px] h-10 -translate-x-1/2 opacity-0 z-[1000]">
           <div className="absolute inset-0 -translate-y-1/2 border-b border-white/40" />
           <div ref={knobRef} className="absolute left-0 w-10 h-10 border-2 border-white rounded-full" />
-        </div>
+        </div>*/}
 
         {/* CALENDARIO */}
         {showCalendar && (
@@ -341,7 +329,7 @@ export const ParallaxImages: React.FC = () => {
           </div>
         )}
         <h2 ref={textRef2} className="font-christmas absolute top-[77%] left-[32.5%] w-[35%] text-[80%] text-center text-white opacity-0">
-          CLICCA SULLA DATA <br/> PER CONOSCERE L'EVENTO DEL GIORNO
+          CLICCA SULLA DATA <br/> PER SCOPRIRE L'EVENTO DEL GIORNO
           <a
             href="https://www.instagram.com/isac.agency"
             target="_blank"
