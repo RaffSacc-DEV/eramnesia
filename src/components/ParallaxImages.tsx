@@ -341,7 +341,7 @@ export const ParallaxImages: React.FC = () => {
           </div>
         )}
         <h2 ref={textRef2} className="font-christmas absolute top-[77%] left-[32.5%] w-[35%] text-[80%] text-center text-white opacity-0">
-          CLICCA SULLA DATA <br/> PER SCOPRIRE L'EVENTO DEL GIORNO
+          CLICCA SULLA DATA <br/> PER CONOSCERE L'EVENTO DEL GIORNO
           <a
             href="https://www.instagram.com/isac.agency"
             target="_blank"
